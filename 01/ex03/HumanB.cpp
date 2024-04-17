@@ -16,7 +16,7 @@ void	HumanB::setName(std::string newName)
 	_name = newName;
 }
 
-void	HumanB::setWeapon(Weapon newWeapon)
+void	HumanB::setWeapon(Weapon &newWeapon)
 {
 	_weapon = &newWeapon;
 }
