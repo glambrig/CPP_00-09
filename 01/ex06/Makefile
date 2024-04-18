@@ -6,7 +6,7 @@
 #    By: glambrig <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 10:34:27 by glambrig          #+#    #+#              #
-#    Updated: 2024/04/18 13:50:47 by glambrig         ###   ########.fr        #
+#    Updated: 2024/04/15 12:57:37 by glambrig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 CFLAGS = -lstdc++ -Wall -Wextra -Werror -g
 
-NAME = harl
+NAME = harlFilter
 
 SRC = *.cpp
 
