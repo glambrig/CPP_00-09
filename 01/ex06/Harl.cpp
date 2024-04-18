@@ -1,6 +1,6 @@
 #include "Harl.hpp"
 
-void	Harl::debug(void)
+void	Harl::_debug(void)
 {
 	std::cout << "[DEBUG]" << std::endl;
 	std::cout << "I love having extra bacon for my 7XL-double-"
@@ -8,7 +8,7 @@ void	Harl::debug(void)
 		<< std::endl;
 }
 
-void	Harl::info(void)
+void	Harl::_info(void)
 {
 	std::cout << "[INFO]" << std::endl;
 	std::cout << "I can't believe adding extra bacon costs more money."
@@ -16,7 +16,7 @@ void	Harl::info(void)
 		<< std::endl;
 }
 
-void	Harl::warning(void)
+void	Harl::_warning(void)
 {
 	std::cout << "[WARNING]" << std::endl;
 	std::cout << "I think I deserve to have some extra bacon for free. "
@@ -24,7 +24,7 @@ void	Harl::warning(void)
 		<< std::endl;
 }
 
-void	Harl::error(void)
+void	Harl::_error(void)
 {
 	std::cout << "[ERROR]" << std::endl;
 	std::cout << "This is unacceptable! I want to speak to the manager now."
@@ -50,16 +50,16 @@ void	Harl::complain(std::string level)
 		switch (which)
 		{
 			case 0:
-				ptr = &Harl::debug;
+				ptr = &Harl::_debug;
 				break;
 			case 1:
-				ptr = &Harl::info;
+				ptr = &Harl::_info;
 				break;
 			case 2:
-				ptr = &Harl::warning;
+				ptr = &Harl::_warning;
 				break;
 			case 3:
-				ptr = &Harl::error;
+				ptr = &Harl::_error;
 				break;
 		}
 		which++;

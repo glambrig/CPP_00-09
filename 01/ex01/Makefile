@@ -6,7 +6,7 @@
 #    By: glambrig <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 10:34:27 by glambrig          #+#    #+#              #
-#    Updated: 2024/03/26 14:09:23 by glambrig         ###   ########.fr        #
+#    Updated: 2024/04/18 14:28:54 by glambrig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	g++ $(SRC) -o $(NAME) $(CFLAGS)
+	c++ $(SRC) -o $(NAME) $(CFLAGS)
 
 clean:
 	rm -rf $(NAME)

@@ -6,10 +6,10 @@
 
 class	Harl
 {
-	void	debug(void);
-	void	info(void);
-	void	warning(void);
-	void	error(void);
+	void	_debug(void);
+	void	_info(void);
+	void	_warning(void);
+	void	_error(void);
 public:
 	void	complain(std::string level);
 };
