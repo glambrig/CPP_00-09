@@ -17,11 +17,14 @@ public:
 	Fixed(const float f);
 	~Fixed(void);
 	Fixed&	operator=(const Fixed& var);
-	Fixed&	operator<<(const Fixed& var);
 	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
 	float	toFloat(void) const;
+	float	toFloat(int i) const;
 	int		toInt(void) const;
+	int		toInt(float f) const;
 };
+
+std::ostream&	operator<<(std::ostream& stream, const Fixed& var);
 
 #endif

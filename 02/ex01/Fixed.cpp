@@ -18,36 +18,34 @@ Fixed::Fixed(const Fixed& copy)
 
 Fixed::Fixed(const int n)
 {
-	//google: how to convert an int to fixed point
 	std::cout << "Int constructor called" << std::endl;
-	this->toFloat();
+	this->_fixed = n << this->_bits;
 }
 
 Fixed::Fixed(const float f)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->toInt();
+	this->_fixed = toInt(f);
 }
 
 Fixed& Fixed::operator=(const Fixed& var)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &var)
-	{
 		this->_fixed = var.getRawBits();
-	}
 	return (*this);
 }
 
-Fixed&	Fixed::operator<<(const std::ostream stream)
+std::ostream&	operator<<(std::ostream& stream, const Fixed& var)
 {
-	std::cout << "Insertion operator called" << std::endl;
-	stream << this->toFloat(this->_fixed) << std::endl;
+	// std::cout << "Insertion operator called" << std::endl;
+	stream << var.toFloat(var.getRawBits());
+	return (stream);
 }
 
 int	Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return (this->_fixed);
 }
 
@@ -58,10 +56,21 @@ void	Fixed::setRawBits(int const raw)
 
 float	Fixed::toFloat(void) const
 {
-	return ((float)(this->_fixed)) // this is just a guess
+	return ((float)(this->_fixed) / (float)(1 << this->_bits));
+}
+
+float	Fixed::toFloat(int i) const
+{
+	return ((float)(i) / (float)(1 << this->_bits));
 }
 
 int		Fixed::toInt(void) const
 {
-	return (this->_fixed << this->_bits); // also a guess
+	return (this->_fixed >> this->_bits);
+}
+
+int		Fixed::toInt(float f) const
+{
+	int	res =  roundf(f * (1 << this->_bits));
+	return (res);
 }
