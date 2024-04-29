@@ -4,8 +4,14 @@ int main()
 {
     DiamondTrap diamondTrap("Robo");
 
+	std::cout << diamondTrap.DiamondTrap::getName() << " has :" << std::endl
+		<< diamondTrap.getHealth() << " hit points" << std::endl
+		<< diamondTrap.getEnergy() << " energy points" << std::endl
+		<< diamondTrap.DiamondTrap::getAttdmg() << " attack damage." << std::endl;
+
     // Test the inherited ScavTrap methods
     diamondTrap.attack("Enemy");
+	std::cout << diamondTrap.getEnergy() << " energy points" << std::endl;
     diamondTrap.takeDamage(20);
     diamondTrap.beRepaired(10);
 

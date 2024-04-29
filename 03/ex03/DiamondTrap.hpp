@@ -20,6 +20,8 @@ public:
 
 	void	attack(const std::string&);
 	void	whoAmI();
+	int		getAttdmg(void);
+	std::string	getName(void);
 };
 
 #endif

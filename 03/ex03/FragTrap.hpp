@@ -14,6 +14,10 @@ public:
 
 	void	attack(const std::string& target);
 	void	highFivesGuys(void);
+	std::string	_name;
+	int			_healthp;
+	int			_energyp;
+	int			_attdmg;
 };
 
 #endif
