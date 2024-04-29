@@ -81,25 +81,37 @@ bool	Fixed::operator!=(const Fixed& instance) const
 float	Fixed::operator+(const Fixed& instance) const
 {
 	float a, b, res;
-	int	conv;
 
 	a = toFloat(this->_fixed);
 	b = toFloat(instance._fixed);
 	res = a + b;
-	conv = toInt(res);
-	return (conv >> this->_bits);
+	return (res);
+	// float a, b, res;
+	// int	conv;
+
+	// a = toFloat(this->_fixed);
+	// b = toFloat(instance._fixed);
+	// res = a + b;
+	// conv = toInt(res);
+	// return (conv >> this->_bits);
 }
 
 float	Fixed::operator-(const Fixed& instance) const
 {
 	float a, b, res;
-	int	conv;
 
 	a = toFloat(this->_fixed);
 	b = toFloat(instance._fixed);
 	res = a - b;
-	conv = toInt(res);
-	return (conv >> this->_bits);
+	return (res);
+	// float a, b, res;
+	// int	conv;
+
+	// a = toFloat(this->_fixed);
+	// b = toFloat(instance._fixed);
+	// res = a - b;
+	// conv = toInt(res);
+	// return (conv >> this->_bits);
 }
 
 float	Fixed::operator*(const Fixed& instance) const
@@ -115,13 +127,19 @@ float	Fixed::operator*(const Fixed& instance) const
 float	Fixed::operator/(const Fixed& instance) const
 {
 	float a, b, res;
-	int	conv;
 
 	a = toFloat(this->_fixed);
 	b = toFloat(instance._fixed);
 	res = a / b;
-	conv = toInt(res);
-	return (conv >> this->_bits);
+	return (res);
+	// float a, b, res;
+	// int	conv;
+
+	// a = toFloat(this->_fixed);
+	// b = toFloat(instance._fixed);
+	// res = a / b;
+	// conv = toInt(res);
+	// return (conv >> this->_bits);
 }
 
 Fixed& Fixed::operator++(void)
