@@ -1,3 +1,4 @@
+#include "Bureaucrat.hpp"
 #include "Form.hpp"
 
 Form::Form() : _name("default"), _execGrade(150), _signGrade(150), _signed(false)
@@ -10,30 +11,35 @@ Form::Form(std::string Name, int signGrade, int execGrade) : _name(Name),
 {
 	try
 	{
-		if (getSignGrade() > 150 || getExecGrade() > 150)
+		if (signGrade > 150 || execGrade > 150)
 			throw ("Form::GradeTooHighException");
-		else if (getSignGrade() < 1 || getExecGrade() < 1)
+		else if (signGrade < 1 || execGrade < 1)
 			throw ("Form::GradeTooLowException");
 	}
-	catch(std::string e)
+	catch(const char *e)
 	{
 		std::cerr << e << std::endl;
 	}
 }
 
-Form::Form(const Form& copy)
+Form::Form(const Form& copy) : _name(copy.getName()), _execGrade(copy.getExecGrade())
 {
 	if (this != &copy)
 		*this = copy;
 }
 
-Form::operator=(const Form& rhs)
+Form&	Form::operator=(const Form& rhs)
 {
-	if (this->_name.empty() == true)
-		this->name = rhs;
+	// if (this->_name.empty() == true)
+	// 	this->_name = rhs.getName();
 	this->_signed = rhs.getSigned();
-	this->_signGrade = rhs.;
-	// this->_execGrade;
+	this->_signGrade = rhs.getSignGrade();
+	return (*this);
+}
+
+Form::~Form()
+{
+
 }
 
 std::string	Form::getName() const
@@ -59,22 +65,30 @@ int	Form::getExecGrade() const
 	return (this->_execGrade);
 }
 
-void	Form::beSigned(const BureauCrat& signer)
+void	Form::beSigned(const Bureaucrat& signer)
 {
 	try
 	{
 		if (signer.getGrade() > this->_signGrade)
 			throw ("Form::GradeTooLowException");
-		else
-			this->_signed = true;
+		this->_signed = true;
+		signer.signForm(*this);
 	}
 	catch (const char *exception)
 	{
-		std::cerr << exception << std::endl;
+		std::cerr << signer.getName() << " : " << exception << std::endl;
 	}
 }
 
-std::ostream& operator<<(std::ostream& stream, const Form& rhs) const
+// std::ostream& Form::operator<<(const std::ostream stream)
+// {
+// 	stream << this->getName() << " " << this->getSigned()
+// 		<< " " << this->getSignGrade() << " " << this->getExecGrade()
+// 		<< std::endl;
+// 	return (stream);
+// }
+
+std::ostream&	operator<<(std::ostream& stream, const Form& rhs)
 {
 	stream << rhs.getName() << " " << rhs.getSigned()
 		<< " " << rhs.getSignGrade() << " " << rhs.getExecGrade()

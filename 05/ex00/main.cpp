@@ -23,6 +23,9 @@ int	main(void)
 	{
 		Bureaucrat b("bureaucrat bill", 999);	//Throws exception
 	}
+	/*Even though the instantiation of 'b' throws an exception,
+		the catch statement below won't execute, because the class itself
+		already handles it.*/
 	catch (...)
 	{
 		std::cout << "SOME TEXT THAT WILL BE SKIPPED..." << std::endl;

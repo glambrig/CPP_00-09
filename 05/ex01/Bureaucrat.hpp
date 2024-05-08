@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+class Form;
+
 class	Bureaucrat
 {
 private:
@@ -19,27 +21,6 @@ public:
 	int			getGrade(void) const;
 	void		incrGrade(void);
 	void		decrGrade(void);
-		class	Form
-		{
-		private:
-			std::string const	_name;
-			bool				_signed;
-			int					_signGrade;
-			int const			_execGrade;
-		public:
-			Form();
-			Form(std::string Name, int signGrade, int execGrade);
-			Form(const Form& copy);
-			Form&	operator=(const Form& rhs);
-			~Form();
-
-
-			std::string	getName() const;
-			bool		getSigned() const;
-			int			getSignGrade() const;
-			int			getExecGrade() const;
-			void		beSigned(const Bureaucrat& signer);
-		};
 	void		signForm(const Form& form) const;
 };
 
