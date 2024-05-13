@@ -70,14 +70,18 @@ void	Form::beSigned(const Bureaucrat& signer)
 	try
 	{
 		if (signer.getGrade() > this->_signGrade)
+		{
+			this->_signed = false;
 			throw ("Form::GradeTooLowException");
-		this->_signed = true;
-		signer.signForm(*this);
+		}
+		else
+			this->_signed = true;
 	}
 	catch (const char *exception)
 	{
 		std::cerr << signer.getName() << " : " << exception << std::endl;
 	}
+	signer.signForm(*this);
 }
 
 // std::ostream& Form::operator<<(const std::ostream stream)
