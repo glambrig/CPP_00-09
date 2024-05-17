@@ -70,7 +70,7 @@ void	identify(Base& p)
 		A &a = dynamic_cast<A&>(p);
 		(void)a;
 	}
-	catch (std::bad_cast& e)
+	catch (...)
 	{
 		arr[0] = 1;
 	}
@@ -79,7 +79,7 @@ void	identify(Base& p)
 		B &b = dynamic_cast<B&>(p);
 		(void)b;
 	}
-	catch (std::bad_cast& e)
+	catch (...)
 	{
 		arr[1] = 1;
 	}
@@ -88,7 +88,7 @@ void	identify(Base& p)
 		C &c = dynamic_cast<C&>(p);
 		(void)c;
 	}
-	catch (std::bad_cast& e)
+	catch (...)
 	{
 		arr[2] = 1;
 	}

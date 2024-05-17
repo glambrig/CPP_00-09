@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <sys/time.h>
-#include <typeinfo>
+// #include <typeinfo>
 
 class Base
 {
