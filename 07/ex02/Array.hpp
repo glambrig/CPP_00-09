@@ -18,6 +18,7 @@ public:
 
 	int	size(void) const;
 	T		*getArr(void) const;
+	// size_t	getSize(void) const;
 	T 		&operator[](int index);
 
 	class	ArrayException : public std::exception

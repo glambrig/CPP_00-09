@@ -23,7 +23,11 @@ Array<T>::Array(const Array& copy)
 {
 	if (this != &copy)
 	{
-		this->_arr = copy.getArr();
+		this->_arr = new T[copy.size()];
+		T	*temp = copy.getArr();
+		for (int i = 0; i < copy.size(); i++)
+			this->_arr[i] = temp[i];
+		this->_size = copy.size();
 	}
 }
 
@@ -31,6 +35,7 @@ template <typename T>
 Array<T>& Array<T>::operator=(Array<T> &rhs)
 {
 	this->_arr = rhs.getArr();
+	this->_size = rhs.size();
 	return (*this);
 }
 
@@ -53,6 +58,12 @@ T	*Array<T>::getArr(void) const
 {
 	return (this->_arr);
 }
+
+// template <typename T>
+// size_t	Array<T>::getSize(void) const
+// {
+// 	return (this->_size);
+// }
 
 template <typename T>
 T&	Array<T>::operator[](int index)
