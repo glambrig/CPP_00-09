@@ -39,6 +39,7 @@ Array<T>::~Array()
 {
 	if (this->_size > 0)
 		delete[] this->_arr;
+	//Does this leak when default (empty) constructor is called?
 }
 
 template <typename T>
