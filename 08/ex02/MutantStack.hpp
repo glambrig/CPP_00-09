@@ -2,24 +2,29 @@
 
 #include <iostream>
 #include <algorithm>
+#include <iterator>
 #include <stack>
+#include <deque>
 
-template <typename T>
-class MutantStack
+template <typename T, class Container = std::deque<T> >
+class MutantStack : public std::stack<T, Container >
 {
-private:
-	std::stack<T>	_stack;
 public:
-	MutantStack();
-	MutantStack(const MutantStack& copy);
-	MutantStack& operator=(const MutantStack& rhs);
-	~MutantStack();
+	MutantStack(){}
+	MutantStack(const MutantStack& copy)
+	{
+		*this = copy;
+	}
+	MutantStack& operator=(const MutantStack& rhs)
+	{
+		if (this != &rhs)
+			*this = rhs;
+		return (*this);
+	}
+	~MutantStack(){}
 
-	bool	empty(void) const;
-	size_t	size(void) const;
-	void	push(T elem);
-	void	pop(void);
-	T&		top(void) const;
+	typedef typename Container::iterator iterator;
+
+	iterator	begin(void) {return (this->c.begin());}
+	iterator	end(void) {return (this->c.end());}
 };
-
-// #include "MutantStack.tpp"
