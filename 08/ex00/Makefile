@@ -6,7 +6,7 @@
 #    By: glambrig <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 10:34:27 by glambrig          #+#    #+#              #
-#    Updated: 2024/05/31 14:30:35 by glambrig         ###   ########.fr        #
+#    Updated: 2024/05/31 14:40:42 by glambrig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,19 +18,17 @@ NAME = a.out
 
 SRC = *.cpp
 
-OBJ = $(SRC:.cpp=.o)
+OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-
-$(OBJ):
 	c++ $(SRC) -o $(NAME) $(CFLAGS)
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf *.o
 
 fclean: clean
 	rm -rf $(NAME)
-	
-re: clean all
+
+re: fclean all
