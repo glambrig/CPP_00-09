@@ -6,26 +6,31 @@
 #    By: glambrig <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/17 10:34:27 by glambrig          #+#    #+#              #
-#    Updated: 2024/05/27 15:00:59 by glambrig         ###   ########.fr        #
+#    Updated: 2024/05/31 14:32:16 by glambrig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all re clean NAME
+.PHONY: all re clean fclean NAME
 
 CFLAGS = -lstdc++ -Wall -Wextra -Werror -std=c++98 -g
 
-NAME = ex01
+NAME = a.out
 
 SRC = *.cpp
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
+
+$(OBJ):
 	c++ $(SRC) -o $(NAME) $(CFLAGS)
 
 clean:
-	rm -rf $(NAME)
+	rm -rf $(OBJ)
 
+fclean: clean
+	rm -rf $(NAME)
+	
 re: clean all

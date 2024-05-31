@@ -4,16 +4,12 @@
 #include <algorithm>
 
 template <typename T>
-T	*easyfind(T *n1, long long n2)
+typename T::iterator	easyfind(T &arr, long long n2)
 {
-	int *pos;
-	T	*begin, *end;
+	typename T::iterator pos;
 
-	begin = &n1[0];
-	for (int i = 0; n1[i]; i++)
-		end = &n1[i];
-	pos = std::find(begin, end, n2);
-	if (*pos == *end && *end != n2)
+	pos = std::find(arr.begin(), arr.end(), n2);
+	if (pos == arr.end())
 		throw ("easyfind::NoMatchException");
 	return (pos);
 }
