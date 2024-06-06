@@ -13,6 +13,9 @@ typedef struct s_date
     int day;
     int month;
     int year;
+	std::string sday;
+	std::string smonth;
+	std::string syear;
 	bool	operator<(const struct s_date rhs) const;
 }   t_date;
 
@@ -26,7 +29,8 @@ public:
     ~Bitcoin();
     Bitcoin&	operator=(const Bitcoin& rhs);
 
-    void    putInMap(std::fstream &file);
+    void    		putInMap(std::fstream &file);
 	static int		parse(t_date &date, float f);
-	void	printAll(void) const;
+	float			getConversion(t_date &d, float amount) const;
+	void			print(t_date &d, float amount) const;
 };

@@ -16,10 +16,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	else
-	{
 		btc.putInMap(file);
-		btc.printAll();
-	}
 	file.close();
 	return (0);
 }
