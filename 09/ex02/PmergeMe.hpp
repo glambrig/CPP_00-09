@@ -20,10 +20,15 @@ public:
 	PmergeMe& operator=(const PmergeMe& rhs);
 	~PmergeMe();
 
-	void	vectorSort(void);
-	void	listSort(void);
+
+	bool	isSorted(std::vector<size_t> &v);
+	void	insertSmallIntoBig(std::vector<size_t> &small, std::vector<size_t> &big);
+	void	vectorSort(std::vector<size_t> &v);
 	void	makeVector(char **av);
-	void	makeList(char **av);
 	void	printVector(void);
+
+	void	listSort(void);
+	void	makeList(char **av);
 	void	printList(void);
+	void	printUnsorted(void);
 };
