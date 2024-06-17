@@ -2,24 +2,23 @@
 
 #include <iostream>
 #include <stack>
+#include <string>
 #include <cstdlib>
 
-bool	isNum(char c);
-bool	isOperand(char c);
+#define ALLOWED_CHARS "+-/* 1234567890"
+// operators, space, and nums
 
-class rpn
+class RPN
 {
-private:
-	std::deque<char>	_stack;
-	std::deque<int>		_res;
-public:
-	rpn();
-	rpn(int ac, char *av);
-	rpn(const rpn& copy);
-	rpn& operator=(const rpn& rhs);
-	~rpn();
-
-	void	addNums(char *av);
-	int		parse(void);
-	int	calculate(void);
+	private:
+		std::stack<double> _stack;
+		double doOperation(char token);
+		bool validInput(const std::string& expr);
+		bool validOperand(char token);
+	public:
+		RPN();
+		RPN(const RPN& src);
+		RPN& operator=(const RPN& src);
+		~RPN();
+		void solveExpression(const std::string& expr);
 };

@@ -1,129 +1,104 @@
 #include "RPN.hpp"
 
-rpn::rpn()
+RPN::RPN()
 {
-
 }
 
-rpn::rpn(int ac, char *av)
+RPN::RPN(const RPN& src)
 {
-	if (ac != 2)
-	{
-		std::cout << "Error: invalid number of arguments" << std::endl;
-		return ;
-	}
-	addNums(av);
+	(void)src;
 }
 
-rpn::rpn(const rpn& copy)
+RPN &RPN::operator=(const RPN& src)
 {
-	if (this != &copy)
-		*this = copy;
-}
-
-rpn& rpn::operator=(const rpn& rhs)
-{
-	if (this != &rhs)
-		*this = rhs;
+	(void)src;
 	return (*this);
 }
 
-rpn::~rpn()
+RPN::~RPN()
 {
-
 }
 
-void	rpn::addNums(char *av)
+void RPN::solveExpression(const std::string& expr)
 {
-	for (int i = 0; av[i]; i++)
+	if (!RPN::validInput(expr))
 	{
-		if (av[i] != ' ')
-			_stack.push_back(av[i]);
+		std::cerr << "Error: invalid expression." << std::endl;
+		return;
+	}
+
+	// push chars one by one into the stack until a operation is found
+	// then pop the last two chars in the stack and perform the operation between them
+
+	std::string token;
+	for (size_t i = 0, len = expr.length(); i < len; i++)
+	{
+		token = expr[i];
+		if (token[0] == ' ')
+			continue;
+		if (isdigit(token[0]))
+			this->_stack.push(atof(token.c_str())); // convert string to double then push
+		else
+			this->_stack.push(RPN::doOperation(token[0])); // do operation then push
+	}
+	std::cout << this->_stack.top() << std::endl;
+}
+
+double RPN::doOperation(char token)
+{
+	double num1, num2;
+
+	if (this->_stack.empty())
+		throw std::runtime_error("Error: Invalid operation.");
+	// récup le dernier élément de la _stack et le supprime
+	num2 = this->_stack.top();
+	this->_stack.pop();
+
+	if (this->_stack.empty())
+		throw std::runtime_error("Error: Invalid operation.");
+
+	num1 = this->_stack.top();
+	this->_stack.pop();
+
+	switch (token)
+	{
+	case '+':
+		return (num1 + num2);
+		break;
+
+	case '-':
+		return (num1 - num2);
+		break;
+
+	case '*':
+		return (num1 * num2);
+		break;
+
+	case '/':
+		if (num2 == 0)
+			throw std::runtime_error("Error: division by zero.");
+		return (num1 / num2);
+		break;
+
+	default:
+		throw std::runtime_error("Error: invalid operation token: " + std::string(1,token));
+		break;
 	}
 }
 
-/*Remember to change the error messages before git push*/
-int	rpn::parse(void)
+bool RPN::validInput(const std::string& expr)
 {
-	std::string s;
-
-	if (_stack.size() < 3)
+	for(size_t i = 0; i < expr.length(); i++)
 	{
-		std::cout << "rpn::parse::tooFewOperatorsError" << std::endl;
-		return (1);
+		if (!isdigit(expr[i]) && expr[i] != ' ' && !validOperand(expr[i]))
+			return (false);
 	}
-	char op = _stack.back();
-	_stack.pop_back();
-	char b = _stack.back();
-	_stack.pop_back();
-	char a = _stack.back();
-	_stack.pop_back();
-	_stack.push_back(a);
-	_stack.push_back(b);
-	_stack.push_back(op);
-	for (int i = 0; !_stack.empty(); i++)
-	{
-		s.append(1, _stack.back());
-		_stack.pop_back();
-	}
-	for (int len = s.length(); len > 0;)
-	{
-		len--;
-		if (!isNum(s[len]) && !isOperand(s[len]))
-		{
-			std::cout << "Error: invalid character." << std::endl;
-	 		return (1);
-		}
-		if (isOperand(s[len]) && (len > 0 && isOperand(s[len - 1])))
-		{
-			std::cout << "rpn::parse::operatorFollowsOperator" << std::endl;
-			return (1);
-		}
-	}
-	if ((!isNum(a) || !isNum(b)) && !isOperand(op))
-	{
-		std::cout << "rpn::parse::invalidOrderError" << std::endl;
-		return (1);
-	}
-	for (int i = s.length() - 1; s[i]; i--)
-	{
-		_stack.push_back(s[i]);
-	}
-	return (0);
+	return (true);
 }
 
-int	rpn::calculate(void)
+bool RPN::validOperand(char token)
 {
-	char arr[3];
-	
-	if (parse() != 0)
-		throw ("Parsing returned false.");
-	while (!_stack.empty())
-	{
-		arr[0] = _stack.front();
-		_stack.pop_front();
-		arr[1] = _stack.front();
-		_stack.pop_front();
-		arr[2] = _stack.front();	//op
-		_stack.pop_front();
-		switch (arr[2])
-		{
-			case '+':
-				_res.push_back((arr[0] - '0') + (arr[1] - '0'));
-				break ;
-			case '-':
-				_res.push_back((arr[0] - '0') - (arr[1] - '0'));
-				break ;
-			case '*':
-				_res.push_back((arr[0] - '0') * (arr[1] - '0'));
-				break ;
-			case '/':
-				_res.push_back((arr[0] - '0') / (arr[1] - '0'));
-				break ;
-			default:
-				return (_res.back());
-		}
-		_stack.push_front(_res.back() + '0');
-	}
-	return (_res.back());
+	if (token == '+' || token == '-' || token == '*' || token == '/')
+		return (true);
+	return(false);
 }

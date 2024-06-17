@@ -1,30 +1,21 @@
 #include "RPN.hpp"
 
-bool	isNum(char c)
+int main(int ac, char **av)
 {
-	if (c >= '0' && c <= '9')
-		return (true);
-	return (false);
-}
-
-bool	isOperand(char c)
-{
-	if (c == '*' || c == '/' || c == '+' || c == '-')
-		return (true);
-	return (false);
-}
-
-int	main(int ac, char **av)
-{
-	rpn	rpn(ac, av[1]);
+	RPN rpn;
+	
+	if (ac != 2)
+	{
+		std::cerr << "Error: wrong number of arguments." << std::endl;
+		return (1);
+	}
 
 	try
 	{
-		int res = rpn.calculate();
-		std::cout << res << std::endl;
+		rpn.solveExpression(av[1]);
 	}
-	catch (const char *e)
+	catch (std::exception& e)
 	{
-		std::cout << e << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 }
